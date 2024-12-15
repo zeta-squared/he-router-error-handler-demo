@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'hyper-express';
+import { Router, Request, Response, MiddlewareNext } from 'hyper-express';
 import { routerTwo } from './routerTwo';
 
 const router = new Router();
@@ -13,6 +13,7 @@ router.set_error_handler((req: Request, res: Response, error: Error) => {
 router['get']('/router/test',
   async (req: Request, res: Response) => {
     console.log('route-specific middleware on router');
+    throw new Error('/router/tst middleware error');
   },
   (req: Request, res: Response) => {
     console.log('/router/test handler');
